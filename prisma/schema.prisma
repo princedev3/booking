@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User{
+  id Int @id @default(autoincrement())
+  email String @unique 
+  names String
+  password String
+  token String @unique
+  active Boolean @default(false)
+  createdAt DateTime @default(now())
+  updateAt DateTime @updatedAt
+ 
+}
+// model ActivateToken{
+//    id Int @id @default(autoincrement())
+//    token String @unique
+//   createdAt DateTime @default(now())
+//   updateAt DateTime @updatedAt
+//   activatedAt DateTime?
+//   userId Int 
+//   user User @relation(fields: [userId],references: [id])
+// }
+
+model Home {
+  id             Int @id @default(autoincrement())
+  user_id        Int
+  name           String?
+  description    String?
+  sqft           Int?
+  capacity       Int?
+  location       String?
+  address        String?
+  amenities      String?
+  availability   String?
+  price_per_hour Int?
+  image          String
+  bookings Bookings[]
+}
+model Bookings {
+   id             Int @id @default(autoincrement())
+   user_id Int
+   homeId Int
+   home Home @relation(fields: [homeId],references: [id],onDelete: Cascade)
+   check_in DateTime
+   check_out DateTime
+}
+
+
+model Image {
+  id             Int @id @default(autoincrement())
+  image          String?
+}
+
