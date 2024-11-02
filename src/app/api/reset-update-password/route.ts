@@ -3,7 +3,7 @@ import { NextRequest, NextResponse } from "next/server";
 import jwt from "jsonwebtoken";
 import prisma from "@/data/prisma";
 
-export const PUT = async (req: NextRequest) => {
+export const PUT = async (req: NextRequest, _res: NextResponse) => {
   try {
     const { token, email } = await req.json();
     const decodedEmail = decodeURIComponent(email);

@@ -4,7 +4,7 @@ import nodemailer from "nodemailer";
 import Mail from "nodemailer/lib/mailer";
 import jwt from "jsonwebtoken";
 
-export const POST = async (req: NextRequest) => {
+export const POST = async (req: NextRequest, _res: NextResponse) => {
   try {
     const { email } = await req.json();
     const min = 1000;

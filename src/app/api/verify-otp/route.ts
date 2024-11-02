@@ -14,7 +14,7 @@ const verifyToken = (token: string, secret: string): Promise<any> => {
   });
 };
 
-export const PUT = async (req: Request) => {
+export const PUT = async (req: Request, _res: NextResponse) => {
   try {
     const { token: tokenId } = await req.json();
     const cookieStore = cookies();

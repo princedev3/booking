@@ -4,8 +4,9 @@ import prisma from "@/data/prisma";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
 
-export const POST = async (req: Request) => {
+export const POST = async (req: Request, _res: NextResponse) => {
   try {
     const { email, names, password } = await req.json();
     const min = 1000;
