@@ -33,7 +33,8 @@ export const POST = async (req: Request, _res: NextResponse) => {
       { expiresIn: age }
     );
 
-    const cookie = cookies().set("token", token, {
+    const cookie = cookies();
+    cookie.set("token", token, {
       httpOnly: true,
       maxAge: age,
       path: "/",
@@ -41,7 +42,6 @@ export const POST = async (req: Request, _res: NextResponse) => {
       secure: false,
     });
     const cookieString = cookie.toString();
-
     const transport = nodemailer.createTransport({
       service: "gmail",
       auth: {
